@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="zh_CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Miniblog</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" type="text/css">
+</head>
+<body>
+<div class="page">
+    <h1>Miniblog</h1>
+    <div class="metanav">
+        {% if not session.logged_in %}
+            <a href="{{ url_for('login') }}">登录</a>
+        {% else %}
+            <a href="{{ url_for('logout') }}">注销</a>
+        {% endif %}
+    </div>
+    {% for message in get_flashed_messages() %}
+        <div class="flash">{{ message }}</div>
+    {% endfor %}
+    {% block body %}{% endblock %}
+</div>
+
+</body>
+</html>
